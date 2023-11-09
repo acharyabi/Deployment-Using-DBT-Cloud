@@ -39,8 +39,8 @@ select
     {{ get_payment_type_description('payment_type') }} as payment_type_description, 
     cast(congestion_surcharge as numeric) as congestion_surcharge
 
-from {{source('staging', 'yellow_tripdata')}}
-where vendorid  is not null
+from tripdata
+where rn=1
 
 -- dbt run --select stg_green_tripdata --vars {"is_test_run":"false"}
 {% if var('is_test_run', default=true) %}
